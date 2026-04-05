@@ -6,41 +6,41 @@
 
 @layer base {
   :root {
-    --background: 30 25% 4%;
-    --foreground: 40 20% 92%;
+    --background: 40 35% 96%;
+    --foreground: 30 20% 14%;
 
-    --card: 30 15% 8%;
-    --card-foreground: 40 20% 92%;
+    --card: 38 30% 98%;
+    --card-foreground: 30 20% 14%;
 
-    --popover: 30 15% 8%;
-    --popover-foreground: 40 20% 92%;
+    --popover: 38 30% 98%;
+    --popover-foreground: 30 20% 14%;
 
-    --primary: 0 72% 45%;
-    --primary-foreground: 40 20% 96%;
+    --primary: 0 72% 42%;
+    --primary-foreground: 40 30% 98%;
 
-    --secondary: 30 15% 12%;
-    --secondary-foreground: 40 20% 92%;
+    --secondary: 36 28% 92%;
+    --secondary-foreground: 30 20% 18%;
 
-    --muted: 30 10% 15%;
-    --muted-foreground: 30 10% 55%;
+    --muted: 36 22% 90%;
+    --muted-foreground: 30 12% 42%;
 
-    --accent: 38 65% 52%;
-    --accent-foreground: 30 25% 4%;
+    --accent: 38 55% 44%;
+    --accent-foreground: 30 20% 14%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 48%;
+    --destructive-foreground: 40 30% 98%;
 
-    --border: 30 10% 18%;
-    --input: 30 10% 18%;
-    --ring: 0 72% 45%;
+    --border: 34 20% 86%;
+    --input: 34 20% 86%;
+    --ring: 0 72% 42%;
 
     --radius: 0.25rem;
 
-    --cream: 35 30% 93%;
-    --charcoal: 30 10% 12%;
-    --gold: 38 65% 52%;
-    --deep-red: 0 72% 45%;
-    --warm-black: 30 25% 4%;
+    --cream: 40 35% 96%;
+    --charcoal: 30 15% 22%;
+    --gold: 38 55% 44%;
+    --deep-red: 0 72% 42%;
+    --warm-black: 30 20% 14%;
 
     --font-display: 'Playfair Display', serif;
     --font-body: 'DM Sans', sans-serif;
@@ -80,11 +80,16 @@
   }
 
   .bg-gradient-dark {
-    background: linear-gradient(180deg, hsl(30 25% 4%) 0%, hsl(30 15% 8%) 100%);
+    background: linear-gradient(180deg, hsl(40 35% 96%) 0%, hsl(36 28% 92%) 100%);
   }
 
   .bg-gradient-section {
-    background: linear-gradient(180deg, hsl(30 15% 6%) 0%, hsl(30 25% 4%) 50%, hsl(30 15% 6%) 100%);
+    background: linear-gradient(
+      180deg,
+      hsl(38 32% 94%) 0%,
+      hsl(40 35% 96%) 50%,
+      hsl(38 32% 94%) 100%
+    );
   }
 
   .border-gradient {
@@ -97,6 +102,41 @@
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Slow-moving gold gradient on text (About headline accent) */
+  .text-shimmer-gold {
+    background: linear-gradient(
+      105deg,
+      hsl(38 50% 36%) 0%,
+      hsl(45 62% 50%) 28%,
+      hsl(38 48% 40%) 48%,
+      hsl(45 70% 58%) 72%,
+      hsl(38 50% 36%) 100%
+    );
+    background-size: 240% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: shimmer-gold-flow 10s ease-in-out infinite;
+  }
+
+  @keyframes shimmer-gold-flow {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .text-shimmer-gold {
+      animation: none;
+      background-position: 0% 50%;
+    }
   }
 }
 

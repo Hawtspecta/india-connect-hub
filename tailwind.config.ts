@@ -101,6 +101,14 @@ export default {
           "0%": { width: "0%" },
           "100%": { width: "100%" },
         },
+        "marquee-work": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+        "accent-glow": {
+          "0%, 100%": { opacity: "0.35" },
+          "50%": { opacity: "0.55" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -110,6 +118,9 @@ export default {
         "slide-up": "slide-up 1s ease-out forwards",
         "scale-in": "scale-in 0.6s ease-out forwards",
         "line-expand": "line-expand 1.5s ease-out forwards",
+        "marquee-work": "marquee-work 55s linear infinite",
+        "marquee-stats": "marquee-work 38s linear infinite",
+        "accent-glow": "accent-glow 6s ease-in-out infinite",
       },
     },
   },
