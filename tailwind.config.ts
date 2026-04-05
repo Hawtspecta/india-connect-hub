@@ -120,6 +120,7 @@ export default {
         "line-expand": "line-expand 1.5s ease-out forwards",
         "marquee-work": "marquee-work 55s linear infinite",
         "marquee-stats": "marquee-work 38s linear infinite",
+        "marquee-clients": "marquee-work 42s linear infinite",
         "accent-glow": "accent-glow 6s ease-in-out infinite",
       },
     },

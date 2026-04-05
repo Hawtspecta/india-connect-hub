@@ -4,6 +4,7 @@ import musicImg from "@/assets/music-performance.jpg";
 import workshopImg from "@/assets/workshop.jpg";
 import eventImg from "@/assets/event-production.jpg";
 import heroImg from "@/assets/hero-dancer.jpg";
+import digitalContentImg from "@/assets/digital-content.jpg";
 
 const services = [
   {
@@ -33,6 +34,13 @@ const services = [
       "End-to-end creative solutions for large-scale cultural events, corporate productions, and brand activations.",
     image: eventImg,
     tags: ["Corporate", "Cultural", "Brand", "Live"],
+  },
+  {
+    title: "Digital Content",
+    description:
+      "A dedicated studio producing high-impact cultural podcasts, performance films, and immersive digital documentaries.",
+    image: digitalContentImg,
+    tags: ["Podcasts", "Video", "Documentary", "VR"],
   },
 ];
 
