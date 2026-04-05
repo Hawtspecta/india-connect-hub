@@ -1,5 +1,7 @@
 # India Connect Hub: A Cultural Experience Organization
 
+**Live Demo**: [https://india-connect-hub.vercel.app/](https://india-connect-hub.vercel.app/)
+
 A modern, high-impact website designed for a multidisciplinary creative organization specializing in performing arts, cultural experiences, event production, workshops, and digital content.
 
 ## 🚀 Getting Started
