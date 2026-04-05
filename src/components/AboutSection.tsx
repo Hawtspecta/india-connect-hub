@@ -79,7 +79,7 @@ const AboutSection = () => {
               performing arts, cultural experiences, event production, and digital
               content. From concept to execution, we deliver end-to-end creative
               solutions that celebrate India's rich heritage while pushing the
-              boundaries of contemporary expression.
+              boundaries of contemporary expression
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 30 }}
