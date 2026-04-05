@@ -1,6 +1,8 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import heroImage from "@/assets/hero-dancer.jpg";
+import heroVideo from "@/assets/download.mp4";
+
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -24,12 +26,13 @@ const HeroSection = () => {
           style={{ scale: imageScale, opacity: imageOpacity }}
           className="absolute inset-0"
         >
-          <img
-            src={heroImage}
-            alt="Indian classical dancer performing on stage"
+          <video
+            src={heroVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-full object-cover"
-            width={1920}
-            height={1080}
           />
         </motion.div>
 
@@ -91,14 +94,6 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Video placeholder notice */}
-        <div className="absolute top-24 right-6 md:right-12">
-          <div className="px-3 py-1.5 border border-border/50 bg-card/50 backdrop-blur-sm">
-            <p className="font-body text-[10px] tracking-widest uppercase text-muted-foreground">
-              Video placeholder
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );
