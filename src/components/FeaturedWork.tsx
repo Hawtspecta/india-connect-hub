@@ -1,5 +1,6 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
+import { cn } from "@/lib/utils";
 import featuredDance from "@/assets/featured-dance.jpg";
 import featuredMusic from "@/assets/featured-music.jpg";
 import eventImg from "@/assets/event-production.jpg";
@@ -84,14 +85,61 @@ const ProjectCard = ({
 }: {
   project: (typeof projects)[0];
 }) => {
+  const [visited, setVisited] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, amount: 0.5 });
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    const checkTouch = () => {
+      const isTouchHardware = 
+        window.matchMedia("(pointer: coarse)").matches ||
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth <= 1024;
+      return isTouchHardware && isSmallScreen;
+    };
+    
+    const handleResize = () => setIsTouch(checkTouch());
+    handleResize(); // Initial check
+    
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const shouldReveal = isTouch && (visited || isInView);
+
   return (
-    <div className="group/card flex-shrink-0 w-[78vw] sm:w-[70vw] md:w-[40vw] lg:w-[32vw] max-w-xl cursor-pointer">
+    <div 
+      ref={cardRef}
+      onClick={() => isTouch && setVisited(true)}
+      className={cn(
+        "group/card flex-shrink-0 w-[78vw] sm:w-[70vw] md:w-[40vw] lg:w-[32vw] max-w-xl cursor-pointer relative",
+        isTouch && "cursor-pointer"
+      )}
+    >
       <div className="relative overflow-hidden mb-6">
+        {/* Mobile Click Indicator */}
+        {isTouch && !visited && (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="absolute top-4 right-4 z-20 bg-background/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-primary/20 shadow-lg pointer-events-none"
+          >
+            <p className="font-body text-[8px] tracking-[0.2em] uppercase text-primary font-bold flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              Tap to Explore
+            </p>
+          </motion.div>
+        )}
         <img
           src={project.image}
           alt={project.title}
           loading="lazy"
-          className="w-full h-[40vh] md:h-[50vh] object-cover grayscale group-hover/card:grayscale-0 transition-all duration-700 group-hover/card:scale-105"
+          className={cn(
+            "w-full h-[40vh] md:h-[50vh] object-cover transition-all duration-700 group-hover/card:scale-105",
+            shouldReveal ? "grayscale-0" : "grayscale group-hover/card:grayscale-0"
+          )}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-warm-black/90 via-warm-black/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" />
         <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8 opacity-0 group-hover/card:opacity-100 translate-y-3 group-hover/card:translate-y-0 transition-all duration-500">

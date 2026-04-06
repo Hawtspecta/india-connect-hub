@@ -1,5 +1,6 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
+import { cn } from "@/lib/utils";
 import musicImg from "@/assets/music-performance.jpg";
 import workshopImg from "@/assets/workshop.jpg";
 import eventImg from "@/assets/event-production.jpg";
@@ -96,8 +97,29 @@ const ServiceCard = ({
   index: number;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-10% 0px -10% 0px" });
   const reduceMotion = useReducedMotion() === true;
+  const [visited, setVisited] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    const checkTouch = () => {
+      const isTouchHardware = 
+        window.matchMedia("(pointer: coarse)").matches ||
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth <= 1024;
+      return isTouchHardware && isSmallScreen;
+    };
+    
+    const handleResize = () => setIsTouch(checkTouch());
+    handleResize(); // Initial check
+    
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const shouldReveal = isTouch && (visited || isInView);
 
   return (
     <motion.div
@@ -105,7 +127,11 @@ const ServiceCard = ({
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: index * 0.1 }}
-      className="group grid md:grid-cols-2 gap-8 md:gap-16 items-center py-10 md:py-12 border-t border-border first:border-t-0 hover:bg-card/30 transition-colors duration-500 px-4 md:px-8 -mx-4 md:-mx-8"
+      onClick={() => isTouch && setVisited(true)}
+      className={cn(
+        "group grid md:grid-cols-2 gap-8 md:gap-16 items-center py-10 md:py-12 border-t border-border first:border-t-0 hover:bg-card/30 transition-colors duration-500 px-4 md:px-8 -mx-4 md:-mx-8",
+        isTouch && "cursor-pointer"
+      )}
     >
       <div className={`${index % 2 === 1 ? "md:order-2" : ""}`}>
         <motion.div
@@ -121,7 +147,10 @@ const ServiceCard = ({
             loading="lazy"
             width={1280}
             height={960}
-            className="w-full h-64 md:h-80 object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+            className={cn(
+              "w-full h-64 md:h-80 object-cover transition-all duration-700 group-hover:scale-105",
+              shouldReveal ? "grayscale-0" : "grayscale group-hover:grayscale-0"
+            )}
           />
         </motion.div>
       </div>
