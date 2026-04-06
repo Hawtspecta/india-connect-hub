@@ -37,6 +37,49 @@ const FeaturedWork = () => {
   const isInView = useInView(titleRef, { once: true, margin: "-100px" });
   const reduceMotion = useReducedMotion() === true;
   const loopItems = [...projects, ...projects];
+  const [isPaused, setIsPaused] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const marqueeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isPaused && !isDragging && marqueeRef.current) {
+        marqueeRef.current.scrollLeft += 1;
+        // Reset scroll when reaching the end to create infinite loop
+        if (marqueeRef.current.scrollLeft >= marqueeRef.current.scrollWidth / 2) {
+          marqueeRef.current.scrollLeft = 0;
+        }
+      }
+    }, 30);
+
+    return () => clearInterval(interval);
+  }, [isPaused, isDragging]);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setStartX(e.pageX - (marqueeRef.current?.offsetLeft || 0));
+    setScrollLeft(marqueeRef.current?.scrollLeft || 0);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - (marqueeRef.current?.offsetLeft || 0);
+    const walk = (x - startX) * 2;
+    if (marqueeRef.current) {
+      marqueeRef.current.scrollLeft = scrollLeft - walk;
+    }
+  };
 
   return (
     <section id="work" className="relative py-16 md:py-24 overflow-hidden bg-gradient-section">
@@ -68,9 +111,18 @@ const FeaturedWork = () => {
         </motion.div>
       </div>
 
-      {/* Continuous marquee (duplicated strip for seamless loop) */}
-      <div className="group/marquee relative w-full overflow-hidden">
-        <div className="flex w-max gap-6 md:gap-8 pl-6 md:pl-12 motion-safe:animate-marquee-work motion-reduce:animate-none group-hover/marquee:motion-safe:[animation-play-state:paused]">
+      {/* Continuous marquee with manual scroll support */}
+      <div 
+        ref={marqueeRef}
+        className="group/marquee relative w-full overflow-x-auto overflow-y-hidden cursor-grab active:cursor-grabbing scrollbar-hide"
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseOut={() => setIsPaused(false)}
+      >
+        <div className="flex gap-6 md:gap-8 pl-6 md:pr-6">
           {loopItems.map((project, i) => (
             <ProjectCard key={`${project.title}-${i}`} project={project} />
           ))}
