@@ -1,10 +1,12 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 const heroVideo = "/assets/Untitled design.mp4";
+const heroPoster = "/assets/hero-dancer.jpg";
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const reduceMotion = useReducedMotion() === true;
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -29,15 +31,23 @@ const HeroSection = () => {
         {/* Background image with parallax scale */}
         <motion.div
           style={{ scale: imageScale, opacity: imageOpacity }}
-          className="absolute inset-0"
+          className="absolute inset-0 bg-cover bg-center"
+          aria-hidden="true"
         >
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${heroPoster})` }}
+          />
           <video
             src={heroVideo}
             autoPlay
             loop
             muted
             playsInline
-            className="w-full h-full object-cover"
+            preload="metadata"
+            poster={heroPoster}
+            onLoadedData={() => setVideoLoaded(true)}
+            className={`w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
           />
         </motion.div>
 
