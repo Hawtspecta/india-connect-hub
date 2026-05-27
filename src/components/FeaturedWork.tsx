@@ -1,9 +1,10 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import featuredDance from "@/assets/featured-dance.jpg";
-import featuredMusic from "@/assets/featured-music.jpg";
-import eventImg from "@/assets/event-production.jpg";
+
+const featuredDance = "/assets/featured-dance.jpg";
+const featuredMusic = "/assets/featured-music.jpg";
+const eventImg = "/assets/event-production.jpg";
 
 const projects = [
   {

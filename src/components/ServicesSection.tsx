@@ -1,11 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import musicImg from "@/assets/music-performance.jpg";
-import workshopImg from "@/assets/workshop.jpg";
-import eventImg from "@/assets/event-production.jpg";
-import heroImg from "@/assets/hero-dancer.jpg";
-import digitalContentImg from "@/assets/digital-content.jpg";
+
+const musicImg = "/assets/music-performance.jpg";
+const workshopImg = "/assets/workshop.jpg";
+const eventImg = "/assets/event-production.jpg";
+const heroImg = "/assets/hero-dancer.jpg";
+const digitalContentImg = "/assets/digital-content.jpg";
 
 const services = [
   {

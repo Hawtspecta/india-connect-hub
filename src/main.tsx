@@ -1,7 +1,8 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import faviconUrl from "@/assets/logo_new.png";
+
+const faviconUrl = "/assets/logo_new.png";
 
 const faviconLink = document.querySelector<HTMLLinkElement>("link[rel='icon']") ?? document.createElement("link");
 faviconLink.rel = "icon";

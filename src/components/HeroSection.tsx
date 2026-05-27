@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import heroVideo from "@/assets/Untitled design.mp4";
+
+const heroVideo = "/assets/Untitled design.mp4";
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);

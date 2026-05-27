@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useInView, useReducedMotion } from "framer-motion";
-import aboutRevealImg from "@/assets/hero-dancer.jpg";
+
+const aboutRevealImg = "/assets/hero-dancer.jpg";
 
 const AboutSection = () => {
   const ref = useRef<HTMLDivElement>(null);
