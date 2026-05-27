@@ -43,7 +43,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="relative py-16 md:py-24 bg-gradient-section">
+    <section id="contact" className="relative py-16 md:py-24 bg-transparent">
       <div className="max-w-7xl mx-auto px-6 md:px-12" ref={ref}>
         <div className="grid md:grid-cols-2 gap-16 md:gap-24">
           {/* Left - CTA */}

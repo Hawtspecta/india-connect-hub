@@ -10,16 +10,21 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="bg-background text-foreground min-h-screen">
+    <div className="text-foreground min-h-screen">
       <Navbar />
       <HeroSection />
-      <AboutSection />
-      <ServicesSection />
-      <FeaturedWork />
-      <ClientSection />
-      <TestimonialsSection />
-      <ContactSection />
-      <Footer />
+      <div className="relative">
+        <div className="pointer-events-none absolute inset-0 bg-[url('/assets/bg.jpg')] bg-cover bg-center bg-fixed opacity-80" />
+        <div className="relative">
+          <AboutSection />
+          <ServicesSection />
+          <FeaturedWork />
+          <ClientSection />
+          <TestimonialsSection />
+          <ContactSection />
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 };

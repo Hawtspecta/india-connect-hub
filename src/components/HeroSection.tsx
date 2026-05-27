@@ -73,24 +73,6 @@ const HeroSection = () => {
           className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/25 to-background"
         />
 
-        {/* Slow orbital frames + soft light pool (disabled when reduced motion) */}
-        {!reduceMotion && (
-          <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-            <motion.div
-              className="absolute -top-[18%] -right-[12%] h-[min(42vmin,380px)] w-[min(42vmin,380px)] rounded-full border border-cream/[0.09]"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-            />
-            <motion.div
-              className="absolute bottom-[-12%] left-[-10%] h-[min(36vmin,300px)] w-[min(36vmin,300px)] rounded-full border border-primary/[0.14]"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 95, repeat: Infinity, ease: "linear" }}
-            />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_40%_at_50%_38%,hsl(var(--primary)/0.14),transparent_65%)] motion-safe:animate-accent-glow" />
-          </div>
-        )}
-
-        {/* Decorative line — draws in from centre */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
@@ -142,27 +124,12 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.75 }}
-            className="mt-8 flex flex-col items-center gap-6"
+            className="mt-8"
           >
             <p className="font-body text-sm md:text-base text-cream/85 max-w-md leading-relaxed drop-shadow-sm">
               A multidisciplinary creative organization bridging traditional art forms
               with contemporary global experiences.
             </p>
-            <a
-              href="#about"
-              className="font-body text-xs tracking-[0.3em] uppercase text-cream/70 hover:text-cream transition-colors flex flex-col items-center gap-3 group"
-            >
-              <span>Scroll to Explore</span>
-              {reduceMotion ? (
-                <div className="w-px h-8 bg-gradient-to-b from-primary/60 to-transparent" />
-              ) : (
-                <motion.div
-                  animate={{ y: [0, 9, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
-                  className="w-px h-8 bg-gradient-to-b from-primary/60 to-transparent"
-                />
-              )}
-            </a>
           </motion.div>
         </div>
 

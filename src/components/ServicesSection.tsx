@@ -52,7 +52,7 @@ const ServicesSection = () => {
   const reduceMotion = useReducedMotion() === true;
 
   return (
-    <section id="services" className="relative py-16 md:py-24 bg-gradient-section">
+    <section id="services" className="relative py-16 md:py-24 bg-transparent">
       <div className="max-w-7xl mx-auto px-6 md:px-12" ref={ref}>
         <motion.div
           initial={{ opacity: 0 }}

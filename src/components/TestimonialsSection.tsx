@@ -43,7 +43,7 @@ const TestimonialsSection = () => {
   return (
     <section
       id="testimonials"
-      className="relative py-16 md:py-24 overflow-hidden bg-gradient-section border-y border-border/60"
+      className="relative py-16 md:py-24 overflow-hidden bg-transparent border-y border-border/60"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12" ref={ref}>
         <motion.div

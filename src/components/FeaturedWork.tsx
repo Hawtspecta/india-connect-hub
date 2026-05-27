@@ -83,7 +83,7 @@ const FeaturedWork = () => {
   };
 
   return (
-    <section id="work" className="relative py-16 md:py-24 overflow-hidden bg-gradient-section">
+    <section id="work" className="relative py-16 md:py-24 overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto px-6 md:px-12" ref={titleRef}>
         <motion.div
           initial={{ opacity: 0 }}

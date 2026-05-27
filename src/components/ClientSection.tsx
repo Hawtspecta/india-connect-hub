@@ -13,7 +13,7 @@ const clients = [
 
 const ClientSection = () => {
   return (
-    <section className="py-16 md:py-24 border-t border-border/50 bg-background overflow-hidden">
+    <section className="py-16 md:py-24 border-t border-border/50 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12 text-center mb-12">
         <p className="font-body text-[10px] md:text-xs tracking-[0.4em] uppercase text-muted-foreground mb-4">
           Trusted by Global Partners

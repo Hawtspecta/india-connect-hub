@@ -15,7 +15,7 @@ const Footer = () => {
   });
 
   return (
-    <footer ref={ref} className="border-t border-border py-12 md:py-14 bg-background">
+    <footer ref={ref} className="border-t border-border py-12 md:py-14 bg-transparent">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid md:grid-cols-3 gap-12 mb-16">
           <motion.div {...col(0)}>
