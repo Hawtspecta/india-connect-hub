@@ -1,13 +1,27 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
-const heroVideo = "/assets/Untitled design.mp4";
+const heroVideo = "/assets/hero-video.mp4";
 const heroPoster = "/assets/hero-dancer.jpg";
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [videoPlaying, setVideoPlaying] = useState(false);
   const reduceMotion = useReducedMotion() === true;
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    videoRef.current.muted = true;
+    videoRef.current
+      .play()
+      .then(() => {
+        setVideoPlaying(true);
+      })
+      .catch(() => {
+        // Some browsers still block autoplay; keep poster visible until ready
+      });
+  }, []);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -31,23 +45,25 @@ const HeroSection = () => {
         {/* Background image with parallax scale */}
         <motion.div
           style={{ scale: imageScale, opacity: imageOpacity }}
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 overflow-hidden"
           aria-hidden="true"
         >
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ${videoPlaying ? "opacity-0" : "opacity-100"}`}
             style={{ backgroundImage: `url(${heroPoster})` }}
           />
           <video
+            ref={videoRef}
             src={heroVideo}
             autoPlay
             loop
             muted
             playsInline
-            preload="metadata"
+            preload="auto"
             poster={heroPoster}
-            onLoadedData={() => setVideoLoaded(true)}
-            className={`w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
+            onPlaying={() => setVideoPlaying(true)}
+            onPause={() => setVideoPlaying(false)}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${videoPlaying ? "opacity-100" : "opacity-0"}`}
           />
         </motion.div>
 
